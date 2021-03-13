@@ -4,3 +4,30 @@ import os, re, shutil
 from tqdm import tqdm 
 from datetime import datetime
 
+# These are the options you can specify according to your needs
+# Specify the path for the folder containing the images to be searched
+search_path = "/path/for/images/to-be-search/"
+# Specify the path for the folder to save images containing the text
+found_path = "/path/for/images/found/"
+# Specify the text to search in images
+search_text = ""    
+# Specify the path for the tesseract executable
+pt.pytesseract.tesseract_cmd = r'<full_path_to_your_tesseract_executable>'
+
+def count_images(path, image_path_list):
+    """This function calculates and returns the total number of images found
+     in the folder containing the images to be searched. It also appends their
+     full path to a list"""
+    number_of_files = 0
+    for subdir, dirs, files in os.walk(search_path):
+        for imageName in files:
+            if imageName.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', \
+                 '.bmp', '.gif')):
+                # If the file has an image extension, increment the counter 
+                # and append full path of the image to image_path_list 
+                number_of_files += 1
+                image_path_list.append(os.path.join(subdir, imageName))
+    return number_of_files
+    
+if __name__ == '__main__': 
+    main() 
