@@ -28,6 +28,16 @@ def count_images(path, image_path_list):
                 number_of_files += 1
                 image_path_list.append(os.path.join(subdir, imageName))
     return number_of_files
+
+def main(): 
+    # A list to store full paths of the images in the search_path.
+    image_path_list = []
     
+    # Count and print the total number of files in path
+    number_of_files = count_images(search_path, image_path_list)
+    print(number_of_files, " image(s) found in the directory: ", search_path)
+
+
+
 if __name__ == '__main__': 
     main() 
