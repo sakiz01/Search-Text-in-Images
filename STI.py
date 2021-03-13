@@ -50,7 +50,16 @@ def main():
                 pbar.update(1)
                 continue
 
+            # Applying OCR using pytesseract for python 
+            image_text = pt.image_to_string(img, lang ="eng") 
 
+            if re.search(search_text, image_text): 
+                # If the text extracted from the image includes the 
+                # search_text copy the image to found_path
+                shutil.copy2(image_path, found_path)
+
+            # Update the progress bar
+            pbar.update(1)        
 
 if __name__ == '__main__': 
     main() 
