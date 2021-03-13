@@ -37,6 +37,19 @@ def main():
     number_of_files = count_images(search_path, image_path_list)
     print(number_of_files, " image(s) found in the directory: ", search_path)
 
+    with tqdm(total=number_of_files) as pbar:
+        # Initialize the progress bar
+        for image_path in image_path_list:
+            # Iterate over the path images in image_path_list
+            try:
+                # Check if the image is valid or not
+                img = Image.open(image_path)    
+            except UnidentifiedImageError:
+                # Print an error message and the file path
+                print("Unidentified image error for the file: ", image_path)
+                pbar.update(1)
+                continue
+
 
 
 if __name__ == '__main__': 
