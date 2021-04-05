@@ -49,9 +49,15 @@ def main():
                 print("Unidentified image error for the file: ", image_path)
                 pbar.update(1)
                 continue
-
-            # Applying OCR using pytesseract for python 
-            image_text = pt.image_to_string(img, lang ="eng") 
+            
+            try:
+                # Applying OCR using pytesseract for python 
+                image_text = pt.image_to_string(img, lang ="eng")
+            except OSError as error:
+                print("The following error has occurred: ", error)
+                pbar.update(1)
+                continue
+                
 
             if re.search(search_text, image_text): 
                 # If the text extracted from the image includes the 
